@@ -1,0 +1,17 @@
+---
+# tasks file for do-ssh
+- name: "Add SSH key to DO account"
+  tags: 
+    - add_ssh_key_to_do
+  digital_ocean:
+    state: present
+    command: ssh
+    name: "{{ item.name }}"
+    ssh_pub_key: "{{ lookup('file', item.pub_key_file) }}"
+  register: ssh_keys
+  with_items:
+     - "{{ do_keys }}"
+
+- local_action: copy content={{ ssh_keys }} dest=roles/do-droplets/vars/ssh_keys.json
+...
+

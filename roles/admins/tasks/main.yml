@@ -1,0 +1,32 @@
+---
+#
+# Create and configure Linux accounts for administrators
+#
+- name: Add administrators
+  tags:
+    - admins
+  #
+  # Generate password with:
+  #
+  #   openssl passwd -salt <salt> -1 <plaintext>
+  #
+  #
+  user: name={{ item }} password=$1$smASUUoE$ePy68/aO8tqh4lXgm.5Q9/ shell=/bin/bash update_password=on_create
+  with_items: "{{ admins }}"
+  register: admin_added
+
+- name: Add SSH keys
+  authorized_key:
+    user={{ item }}
+    exclusive=yes
+    key="{{ lookup('file', 'keys/' + item + '.pub')}}"
+  with_items: "{{ admins }}"
+
+- name: Add to sudoers
+  lineinfile:
+    "dest=/etc/sudoers
+    regexp='^{{ item }} ALL'
+    line='{{ item }} ALL=(ALL) PASSWD: ALL'
+    state=present"
+  with_items: "{{ admins }}"
+...

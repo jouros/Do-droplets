@@ -1,0 +1,26 @@
+---
+# The public SSH keys you want to add to your account.
+#do_keys:
+#   - name: [NAME]                              # The name of a SSH key
+#     pub_key_file: "~/.ssh/id_rsa.pub"       # The public SSH key file
+#do_keys: []
+
+# Droplets to be created
+do_droplets1:
+   backups_enabled:    no                    # Boolean, enables backups for your droplet.
+   image_id:           ubuntu-18-04-x64      # This is the slug of the image you would like the droplet created with.
+   name:               blaablaa               # The name of the droplet. Must be unique.
+   port:               22                    # Needed in do_droplets wait for ssh port to become available
+   private_networking: yes                   # Boolean, add an additional, private network interface to droplet for inter-droplet communication.
+   region_id:          fra1                  # This is the slug of the region you would like your server to be created in.
+   size_id:            1gb                 # This is the slug of the size you would like the droplet created with.
+   ssh_key_name:       [NAME]               # SSH key name (defined in do_keys)
+   user:               [NAME]               # Admin user to create
+   virtio:             yes                   # Boolean, turn on virtio driver in droplet for improved network and storage I/O.
+   wait:               yes                   # Wait for the droplet to be in state 'running' before returning.
+   wait_timeout:       600                   # How long before wait gives up, in seconds.
+   #do_droplets: []
+# Inventory file to update
+do_inventory_file: inventory/hosts
+# Hosts file to update
+do_hosts_file:

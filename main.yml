@@ -1,0 +1,9 @@
+---
+- name: Provision DigitalOcean droplets
+  hosts: localhost
+  gather_facts: no
+  become: no
+  roles:
+    - { role: do-ssh, tags: ['do-ssh'] }
+    - { role: do-droplets, tags: ['do-droplets'] }
+...

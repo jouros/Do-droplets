@@ -1,0 +1,7 @@
+---
+- name: Create Admin accounts
+  hosts: all 
+  gather_facts: no
+  become: true
+  roles:
+    - { role: admins, tags: ['admins'] }

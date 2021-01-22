@@ -1,0 +1,6 @@
+---
+# defaults file for do-ssh
+do_keys:
+   - name: [NAME]                              # The name of a SSH key
+     pub_key_file: "~/.ssh/id_rsa.pub"       # The public SSH key file
+...
