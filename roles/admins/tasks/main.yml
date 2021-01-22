@@ -11,7 +11,7 @@
   #   openssl passwd -salt <salt> -1 <plaintext>
   #
   #
-  user: name={{ item }} password=$1$smASUUoE$ePy68/aO8tqh4lXgm.5Q9/ shell=/bin/bash update_password=on_create
+  user: name={{ item }} password=[GENERATED PASSWORD] shell=/bin/bash update_password=on_create
   with_items: "{{ admins }}"
   register: admin_added
 
